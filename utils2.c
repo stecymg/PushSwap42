@@ -12,23 +12,32 @@
 
 #include "push_swap.h"
 
-//je check si jai que jai digit dans mon char je retourne 1 sinon 0
+//je check si jai que jai digit dans mon char je retourne 0 sinon 1
 int	ft_digit(int ac, char **av)
 {
 	int		i;
-	char	c;
+	int		val;
 
 	while (--ac)
 	{
-		i = -1;
-		while (av[ac][++i])
+		val = 0;
+		i = 0;
+		while (av[ac][i] == ' ')
+			i++;
+		if (av[ac][i] == '-')
+			i++;
+		while ((av[ac][i] >= '0' && av[ac][i] <= '9'))
 		{
-			c = av[ac][i];
-			if ((c < '0' || c > '9') && (c != '-' && c != ' '))
-				return (1);
-		}
+			val = 1;
+			i++;
+		}	
+		while (av[ac][i])
+			if (av[ac][i++] != ' ')
+				return (0);
+		if (val == 0)
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 /*calcule de la distance entre le haut et le bas de la valeur dans

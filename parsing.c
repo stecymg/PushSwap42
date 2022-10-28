@@ -36,7 +36,7 @@ char	**check_digit(int ac, char **av)
 	char	*s;
 	int		i;
 
-	if (ft_digit(ac, av))
+	if (!ft_digit(ac, av))
 		ft_error(NULL, 0);
 	s = malloc(sizeof(char));
 	if (!s)
@@ -58,6 +58,26 @@ char	**check_digit(int ac, char **av)
 	return (sa);
 }
 
+int	check_order(char **strs)
+{
+	int	i;
+	int	counter;
+
+	i = 1;
+	counter = 1;
+	if (!strs[0])
+		return (0);
+	while (strs && strs[i + 1])
+	{
+		if (ft_atoi(strs[i - 1]) < ft_atoi(strs[i]))
+			counter++;
+		i++;
+	}
+	if (counter == i)
+		return (1);
+	return (0);
+}
+
 //checker les arguments que je recois
 int	check_args(int ac, char **av)
 {
@@ -70,6 +90,8 @@ int	check_args(int ac, char **av)
 	{
 		j = i + 1;
 		value = ft_atoi(av[i]);
+		if (ft_strlen(av[i]) > 11)
+			return (0);
 		if ((value > 2147483647) || (value < -2147483648))
 			return (0);
 		while (j < ac - 1)

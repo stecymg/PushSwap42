@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-void	print_list(t_list *bis)
-{
-	while (bis)
-	{
-		printf("[%d]--->", bis->value);
-		bis = bis->next;
-	}
-	printf("NULL");
-	printf("\n");
-}
-
 int	find_smallest(t_list *list)
 {
 	t_list	*temp;
@@ -49,7 +38,7 @@ void	free_list(t_list *list, int value, int flag)
 	while (list2)
 	{
 		if (list->value == value && flag == 1)
-			free(list->tab_list);
+			free(list->tab_lis);
 		if (list->value == value && flag == 1)
 			free(list->tab);
 		free(list);
@@ -96,4 +85,32 @@ t_list	*ft_list_push_front(t_list **begin_list, t_list *list)
 		*begin_list = lis;
 	}
 	return (*begin_list);
+}
+
+long long	ft_atoi(const char *str)
+{
+	long			i;
+	int				signe;
+	long long int	nbr;
+
+	nbr = 0;
+	signe = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '+')
+			signe = signe * 1;
+		if (str[i] == '-')
+			signe = signe * (-1);
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr = nbr * 10 + str[i] - 48;
+		i++;
+	}
+	nbr = nbr * signe;
+	return (nbr);
 }

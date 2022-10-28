@@ -27,8 +27,6 @@ t_list	*ft_init_list_input(int size, char **strs)
 		element->next = last_element;
 		last_element = element;
 	}
-	last_element = NULL;
-	free(last_element);
 	return (element);
 }
 

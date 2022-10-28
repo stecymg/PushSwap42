@@ -24,15 +24,15 @@ typedef struct s_list
 	int				cost_move;
 	char			**strs;
 	int				*tab;
-	int				*tab_list;
-	int				size_list;
+	int				*tab_lis;
+	int				size_lis;
 	int				index;
 }	t_list;
 
 char		**check_digit(int ac, char **av);
 void		init_list(t_list **list, int ac, char **av);
-void		print_list(t_list *beta);
 void		free_list(t_list *list, int value, int flag);
+void		free_strs(char **strs, int size);
 t_list		*ft_create_element(int value);
 t_list		*ft_init_list_input(int size, char **strs);
 t_list		*ft_list_push_back(t_list **begin_list, t_list *list);
@@ -43,13 +43,13 @@ void		push(t_list **list1, t_list **list2, char c);
 void		rotate(t_list **list, int i, char c);
 void		reverse_rotate(t_list **list, int i, char c);
 int			ft_list_size(t_list *begin_list);
-int			check_sort(t_list **list);
+void		check_sort(t_list **list);
 int			init_tab(int ac, char **av, t_list **list);
 int			find_index_biggest_number(int ac, int *tab);
 int			cost_move_a(t_list **list);
 void		three_value(t_list **list);
 void		sort_all(int ac, char **av);
-void		send_to_b(t_list **st_a, t_list **stack_b, int *tab, int size_list);
+void		send_to_b(t_list **st_a, t_list **stack_b, int *tab, int size_lis);
 int			smallest_value(t_list *list);
 void		send_to_a(t_list **stack_a, t_list **stack_b);
 int			search_value(t_list **stack_a, t_list **stack_b, int i);
@@ -62,5 +62,6 @@ int			ft_digit(int ac, char **av);
 int			ft_strlen(char *str);
 void		ft_error(char **strs, int size);
 void		sort_five(t_list *stack_a, t_list *stack_b, int size);
+int			check_order(char **strs);
 
 #endif

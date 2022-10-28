@@ -51,8 +51,8 @@ char	**writing(char **tab, char *s, char c, int word)
 	int	j;
 
 	j = 0;
-	i = -1;
-	while (++i < word)
+	i = 0;
+	while (i < word)
 	{
 		while (*s == c)
 			s++;
@@ -62,10 +62,12 @@ char	**writing(char **tab, char *s, char c, int word)
 		j = 0;
 		while (*s && *s != c)
 		{
-			tab[i][j++] = *s;
+			tab[i][j] = *s;
+			j++;
 			s++;
 		}
 		tab[i][j] = '\0';
+		i++;
 	}
 	tab[i] = 0;
 	return (tab);
@@ -76,9 +78,11 @@ char	**ft_split(char *s, char c)
 	int			word;
 	char		**tab;
 
+	if (!s)
+		return (0);
 	word = nb_word(s, c);
 	tab = malloc(sizeof (char *) * (word + 1));
-	if (!s || !tab)
+	if (!tab)
 		return (0);
 	tab = writing(tab, s, c, word);
 	return (tab);

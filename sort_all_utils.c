@@ -31,7 +31,6 @@ void	find_leader_utils(t_list **temp, t_list **temp2, int i)
 	}
 }
 
-//leader est la valeur la + grande que ma valeur mais la plus proche
 void	find_leader(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp;
@@ -82,7 +81,7 @@ chercher la valeur de List pour l'envoyer dans la stack_b
 tab = valeur de mon list
 size_list = longueur de ma list
  */
-void	send_to_b(t_list **st_a, t_list **stack_b, int *tab, int size_list)
+void	send_to_b(t_list **st_a, t_list **stack_b, int *tab, int size_lis)
 {
 	int		j;
 	t_list	*temp;
@@ -91,9 +90,9 @@ void	send_to_b(t_list **st_a, t_list **stack_b, int *tab, int size_list)
 	j = 0;
 	while (temp)
 	{
-		while (j < size_list && tab[j] != temp->value)
+		while (j < size_lis && tab[j] != temp->value)
 			j++;
-		if (j >= size_list)
+		if (j >= size_lis)
 		{
 			cost_move_a(st_a);
 			pb_condition(st_a, stack_b, temp->value);

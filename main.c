@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-void	free_strs(char **strs, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-		free(strs[i++]);
-	free(strs);
-}
-
-void	ft_error(char **strs, int size)
-{
-	if (strs)
-		free_strs(strs, size);
-	ft_printf("Error\n");
-	exit(1);
-}
-
 int	ft_strlen_tab(char **strs)
 {
 	int	i;
@@ -40,32 +22,38 @@ int	ft_strlen_tab(char **strs)
 	return (i);
 }
 
-long long	ft_atoi(const char *str)
+void	free_strs(char **strs, int size)
 {
-	long			i;
-	int				signe;
-	long long int	nbr;
+	int	i;
 
-	nbr = 0;
-	signe = 1;
 	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	size = ft_strlen_tab(strs) + 1;
+	if (strs && size)
 	{
-		if (str[i] == '+')
-			signe = signe * 1;
-		if (str[i] == '-')
-			signe = signe * (-1);
-		i++;
+		while (i < size && strs[i])
+			free(strs[i++]);
+		free(strs);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	strs = NULL;
+}
+
+void	ft_error(char **strs, int size)
+{
+	if (strs)
+		free_strs(strs, size);
+	ft_printf("Error\n");
+	exit(1);
+}
+
+void	check_errors(int size, char **strs)
+{
+	if (check_args(size, strs) == 0 || !strs)
+		ft_error(strs, size);
+	if (check_order(strs))
 	{
-		nbr = nbr * 10 + str[i] - 48;
-		i++;
+		free_strs(strs, size);
+		exit(1);
 	}
-	nbr = nbr * signe;
-	return (nbr);
 }
 
 int	main(int ac, char **av)
@@ -74,17 +62,19 @@ int	main(int ac, char **av)
 	char	**strs;
 	int		size;
 
+	if (ac == 1)
+		return (1);
 	strs = check_digit(ac, av);
 	size = ft_strlen_tab(strs) + 1;
-	if (check_args(size, strs) == 0 || !strs)
-		ft_error(strs, size);
+	check_errors(size, strs);
 	if (size == 4 || size == 3)
 	{
 		stack_a = ft_init_list_input(size - 1, strs);
+		check_sort(&stack_a);
 		if (size == 3)
 		{
-			if (check_sort(&stack_a) == 0)
-				swap(&stack_a, 'a');
+			check_sort(&stack_a);
+			swap(&stack_a, 'a');
 		}
 		else
 			three_value(&stack_a);
@@ -92,6 +82,5 @@ int	main(int ac, char **av)
 	}
 	else if (size >= 5)
 		sort_all(size, strs);
-	free_strs(strs, size);
-	return (1);
+	return (free_strs(strs, size), 0);
 }

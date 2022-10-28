@@ -6,7 +6,7 @@
 #    By: smontgen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 15:00:05 by smontgen          #+#    #+#              #
-#    Updated: 2022/10/21 15:00:10 by smontgen         ###   ########.fr        #
+#    Updated: 2022/10/27 15:59:45 by smontgen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ MANDATORY_SRCS	=	${MANDATORY}
 
 MANDATORY_OBJS	= ${MANDATORY_SRCS:.c=.o}
 
-CFLAGS	= -g -Wall -Werror -Wextra
+CFLAGS	= -g3 -Wall -Werror -Wextra
 
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

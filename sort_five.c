@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 //checker si ma liste a été triée
-int	check_sort(t_list **list)
+void	check_sort(t_list **list)
 {
 	t_list	*temp;
 	t_list	*temp2;
@@ -30,11 +30,14 @@ int	check_sort(t_list **list)
 		if (temp2)
 		{
 			if (temp->value > temp2->value)
-				return (0);
+				return ;
 			temp2 = temp2->next;
 		}
 	}
-	return (1);
+	(*list)->tab_lis = NULL;
+	(*list)->tab = NULL;
+	free_list(*list, 0, 1);
+	exit(EXIT_FAILURE);
 }
 
 /*

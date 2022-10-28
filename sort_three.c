@@ -51,15 +51,13 @@ void	three_value(t_list **list)
 	t_list	*temp;
 
 	temp = (*list);
-	if (check_sort(list) == 0)
+	check_sort(list);
+	if (temp->value > temp->next->value)
 	{
-		if (temp->value > temp->next->value)
-		{
-			first_case(list);
-		}	
-		else
-		{
-			other_case(list);
-		}
+		first_case(list);
+	}	
+	else
+	{
+		other_case(list);
 	}
 }
